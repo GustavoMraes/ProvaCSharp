@@ -31,8 +31,8 @@ class ClientesRepository {
             var cep = reader.GetString(4);
             var uf = reader.GetString(5);
             var ie = reader.GetString(6);
-            var clientes = ReaderToClientes(reader);
-            clientes.Add(clientes);
+            var cliente =  ReaderToCliente(reader);
+            clientes.Add(cliente);
         }
 
         connection.Close();
@@ -88,11 +88,11 @@ class ClientesRepository {
         var reader = command.ExecuteReader();
         reader.Read();
 
-        var clientes = ReaderToClientes(reader);
+        var cliente = ReaderToCliente(reader);
 
         connection.Close(); 
 
-        return clientes;
+        return cliente;
     }
     private Clientes ReaderToCliente(SqliteDataReader reader)
     {
