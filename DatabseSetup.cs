@@ -44,7 +44,7 @@ class DatabaseSetup {
         var command = connection.CreateCommand();
         command.CommandText = @"
             CREATE TABLE IF NOT EXISTS Pedidos(
-                codpedido int not null primary key,
+                codpedido int not nulPedidosl primary key,
                 prazoentrega datetime not null,
                 datapedido datetime not null,
                 pedidocodcliente int not null,

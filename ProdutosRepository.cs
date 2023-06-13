@@ -9,4 +9,69 @@ class ProdutosRepository{
     {
         _databaseConfig = databaseConfig;
     }
+
+
+    public List<Produtos> Listar()
+    {
+        var Produtos = new List<Produtos>();
+
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT * FROM Produtos";
+
+        var reader = command.ExecuteReader();
+
+        while(reader.Read())
+        {
+            var CodProduto = reader.GetInt32(0);
+            var Descricao = reader.GetString(1);
+            var ValorUnitario = reader.GetDecimal(2);
+           
+           
+            var Produto = ReadertoProdutos(reader);
+            Produtos.Add(Produto);
+        }
+
+        connection.Close();
+        
+        return Produtos;
+    }
+
+
+    public Produtos GetById(int CodProduto)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT * FROM Produtos WHERE (id = $CodProduto)";
+        command.Parameters.AddWithValue("$CodProduto", CodProduto);
+
+        var reader = command.ExecuteReader();
+        reader.Read();
+
+        var produto = ReadertoProdutos(reader);
+
+        connection.Close(); 
+
+        return produto;
+    }
+
+    
+
+
+
+
+
+
+
+     private Produtos ReadertoProdutos(SqliteDataReader reader)
+    {
+        var Produto = new Produtos(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2));
+
+        return Produto;
+    }
+
 }

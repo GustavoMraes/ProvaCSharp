@@ -55,14 +55,7 @@ class PedidosRepository {
         connection.Close();
 
         return pedido;
-    }
-
-     private Pedidos ReaderToPedidos(SqliteDataReader reader)
-    {
-        var Pedido = new Pedidos(reader.GetInt32(0), reader.GetDateTime(1), reader.GetDateTime(2), reader.GetInt32(3), reader.GetInt32(4));
-
-        return Pedido;
-    }
+    }     
 
     public Pedidos GetById(int coditempedido)
     {
@@ -81,6 +74,13 @@ class PedidosRepository {
         connection.Close(); 
 
         return pedido;
+    }
+
+    private Pedidos ReaderToPedidos(SqliteDataReader reader)
+    {
+        var Pedido = new Pedidos(reader.GetInt32(0), reader.GetDateTime(1), reader.GetDateTime(2), reader.GetInt32(3), reader.GetInt32(4));
+
+        return Pedido;
     }
 
 
