@@ -3,7 +3,8 @@ using AtividadeAvaliativa.Models;
 using Microsoft.Data.Sqlite;
 namespace AtividadeAvaliativa.Repositories;
 
-class ItensPedidosRepository {
+class ItensPedidosRepository 
+{
     private readonly DatabaseConfig _databaseConfig;
     public ItensPedidosRepository(DatabaseConfig databaseConfig)
     {
@@ -11,9 +12,9 @@ class ItensPedidosRepository {
     }
 
 
-    public List<ItensPedidosRepository> Listar()
+    public List<ItensPedidos> Listar()
     {
-        var itensPedidos = new List<Clientes>();
+        var itensPedidos = new List<ItensPedidos>();
 
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
@@ -29,29 +30,73 @@ class ItensPedidosRepository {
             var itempedidocodpedido = reader.GetString(1);
             var itempedidocodproduto = reader.GetString(2);
             var quantidade = reader.GetString(3);            
-            var itensPedido =  ReaderToItensPedido(reader);
+            var itensPedido =  ReaderToItensPedidos(reader);
             itensPedidos.Add(itensPedido);
         }
 
+        connection.Close();
+        
+        return itensPedidos;
 
-    public Clientes Inserir(Clientes clientes)
+    }
+
+
+        public ItensPedidos Inserir(ItensPedidos itensPedidos)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "INSERT INTO Clientes VALUES($coditempedido, $itempedidocodpedido, $itempedidocodproduto, $quantidade)";
-        command.Parameters.AddWithValue("$coditempedido", clientes.CodCliente);
-        command.Parameters.AddWithValue("$itempedidocodpedido", clientes.Nome);
-        command.Parameters.AddWithValue("$itempedidocodproduto", clientes.Endereco);
-        command.Parameters.AddWithValue("$quantidade", clientes.Cidade);
+        command.CommandText = "INSERT INTO ItensPedidos VALUES($coditempedido, $itempedidocodpedido, $itempedidocodproduto, $quantidade)";
+        command.Parameters.AddWithValue("$coditempedido", itensPedidos.CodItemPedido);
+        command.Parameters.AddWithValue("$itempedidocodpedido", itensPedidos.ItemPedidoCodPedido);
+        command.Parameters.AddWithValue("$itempedidocodproduto", itensPedidos.ItemPedidoCodProduto);
+        command.Parameters.AddWithValue("$quantidade", itensPedidos.Quantidade);
        
 
         command.ExecuteNonQuery();
         connection.Close();
 
-        return clientes;
+        return itensPedidos;
     }
+
+    public bool Apresentar(int itensPedidosid)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT count(id) FROM ItensPedidos WHERE (id = $id)";
+        command.Parameters.AddWithValue("$id", itensPedidosid);
+
+        var reader = command.ExecuteReader();   
+        reader.Read();
+        var result = reader.GetBoolean(0);
+
+        return result;
+    }
+
+     public ItensPedidos GetById(int coditempedido)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT * FROM ItensPedidos WHERE (id = $coditempedido)";
+        command.Parameters.AddWithValue("$coditempedido", coditempedido);
+
+        var reader = command.ExecuteReader();
+        reader.Read();
+
+        var itemPedido = ReaderToItensPedidos(reader);
+
+        connection.Close(); 
+
+        return itemPedido;
+    }
+
+
+
 
     private ItensPedidos ReaderToItensPedidos(SqliteDataReader reader)
     {
@@ -59,5 +104,5 @@ class ItensPedidosRepository {
 
         return ItemPedido;
     }
+    }
 
-}
