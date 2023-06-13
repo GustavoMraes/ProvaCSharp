@@ -6,11 +6,11 @@ using AtividadeAvaliativa.Models;
 var databaseConfig = new DatabaseConfig();
 var databaseSetup = new DatabaseSetup(databaseConfig);
 
-var clienteRepository = new ClientesRepository(databaseConfig);
-var pedidoRepository = new PedidosRepository(databaseConfig);
-var itenspedidoRepository = new ItensPedidosRepository(databaseConfig);
-var vendedoreRepository = new VendedoresRepository(databaseConfig);
-var produtoRepository = new ProdutosRepository(databaseConfig);
+var clientesRepository = new ClientesRepository(databaseConfig);
+var pedidosRepository = new PedidosRepository(databaseConfig);
+var itenspedidosRepository = new ItensPedidosRepository(databaseConfig);
+var vendedoresRepository = new VendedoresRepository(databaseConfig);
+var produtosRepository = new ProdutosRepository(databaseConfig);
 
 var modelName = args[0];
 var modelAction = args[1];
@@ -20,45 +20,51 @@ if(modelName == "Cliente")
 {
     if(modelAction == "Listar")
     {
-        Console.WriteLine("Cliente Listado!");
-        Console.WriteLine("Id Cliente   Endereço do Cliente           Cidade                     Região                     Código Postal        País                          Telefone");
-        foreach (var cliente in clienteRepository.GetAll()) 
+        Console.WriteLine("Listar Cliente");
+        Console.WriteLine("Código Cliente  Nome Cliente          Endereço                     Cidade                     CEP         UF                          IE");
+        foreach (var cliente in clientesRepository.Listar()) 
         {
-             Console.WriteLine($"{cliente.ClienteID, -12} {cliente.Endereco, -29} {cliente.Cidade, -26} {cliente.Regiao, -26} {cliente.Codigopostal, -20} {cliente.Pais, -29} {cliente.Telefone}");
+             Console.WriteLine($"{cliente.CodCliente, -12} {cliente.Nome, -29} {cliente.Endereco, -26} {cliente.Cidade, -26} {cliente.Cep, -20} {cliente.Uf, -29} {cliente.Ie}");
         }
     }
 
     if(modelAction == "Inserir")
     {
-        Console.WriteLine("Cliente Inserido!");
-
-        var clienteID = Convert.ToInt32(args[2]);   
-        string endereco  = args[3];
-        string cidade  = args[4];
-        string regiao  = args[5];
-        string codigoPostal  = args[6];
-        string pais  = args[7];
-        string telefone  = args[8];
+        Console.WriteLine("Inserir Cliente!");
+        Console.WriteLine("Digite o código do cliente    : ");
+        var codcliente = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Digite o Nome do cliente      : ");   
+        string nome  = Console.ReadLine();
+        Console.WriteLine("Digite o Endereço do cliente  : ");
+        string endereco  =  Console.ReadLine();
+        Console.WriteLine("Digite o Cidade do cliente    : ");
+        string cidade  = Console.ReadLine();
+        Console.WriteLine("Digite o CEP do cliente       : ");
+        string cep = Console.ReadLine();
+        Console.WriteLine("Digite o UF do cliente        : ");
+        string uf  = Console.ReadLine();
+        Console.WriteLine("Digite o Inscrição Estatual   : ");
+        string ie  = Console.ReadLine();
        
-        var cliente = new Cliente(clienteID, endereco, cidade, regiao, codigoPostal, pais, telefone);
-        clienteRepository.Save(cliente);
+        var cliente = new Clientes(codcliente, nome, endereco, cidade, cep, uf, ie);
+        clientesRepository.Inserir(cliente);
     }
 
 
     if(modelAction == "Apresentar")
     {
         Console.WriteLine("Apresentar Cliente");
-	    Console.Write("Digite o id do cliente : ");
+	    Console.Write("Digite o código do cliente : ");
         var clienteid = Convert.ToInt32(Console.ReadLine());
        
-        if(clienteRepository.ExitsById(clienteid))
+        if(clientesRepository.Apresentar(clienteid))
         {
-            var cliente = clienteRepository.GetById(clienteid);
-            Console.WriteLine($"{cliente.ClienteID}, {cliente.Endereco}, {cliente.Cidade}, {cliente.Regiao}, {cliente.Codigopostal}, {cliente.Pais}, {cliente.Telefone}");
+            var cliente = clientesRepository.GetById(clienteid);
+            Console.WriteLine($"{cliente.CodCliente}, {cliente.Nome}, {cliente.Endereco}, {cliente.Cidade}, {cliente.Cep}, {cliente.Uf}, {cliente.Ie}");
         } 
         else 
         {
-            Console.WriteLine($"O cliente com Id {clienteid} não existe.");
+            Console.WriteLine($"O cliente com o código {clienteid} não existe.");
         }
     }
 }
@@ -72,16 +78,17 @@ if(modelName == "Pedido")
 
         Console.WriteLine("Pedido Listado!");
          Console.WriteLine("Nro Pedido   Id Empregado   Data do Pedido        Peso        Codigo da Transportadora   Id do Cliente");
-        foreach (var pedido in pedidoRepository.GetAll())
+        foreach (var pedido in pedidosRepository.GetAll())
         {
-             Console.WriteLine($"{pedido.PedidoID, -12} {pedido.EmpregadoID, -14} {pedido.DataPedido, -21} {pedido.Peso, -9} {pedido.CodTransportadora, -28} {pedido.PedidoClienteID}");
+             Console.WriteLine($"{pedido.CodPedido, -12} {pedido.EmpregadoID, -14} {pedido.DataPedido, -21} {pedido.Peso, -9} {pedido.CodTransportadora, -28} {pedido.PedidoClienteID}");
         }
     }
 
     if(modelAction == "Inserir")
     {
-        Console.WriteLine("Pedido Inserido!");
-        var pedidoId = Convert.ToInt32(args[2]);
+        Console.WriteLine("Inserir Pedido");
+        Console.WriteLine("Digite o código do Pedido");
+        var codPedido = Convert.ToInt32(args[2]);
         var empregadoID = Convert.ToInt32(args[3]);
         string dataPedido = args[4];
         string peso = args[5];
