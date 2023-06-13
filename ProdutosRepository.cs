@@ -3,7 +3,7 @@ using AtividadeAvaliativa.Models;
 using Microsoft.Data.Sqlite;
 namespace AtividadeAvaliativa.Repositories;
 
-class ProdutosRepository {
+class ProdutosRepository{
     private readonly DatabaseConfig _databaseConfig;
     public ProdutosRepository(DatabaseConfig databaseConfig)
     {

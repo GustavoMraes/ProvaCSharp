@@ -6,11 +6,11 @@ using AtividadeAvaliativa.Models;
 var databaseConfig = new DatabaseConfig();
 var databaseSetup = new DatabaseSetup(databaseConfig);
 
-var clientesRepository = new ClientesRepository(databaseConfig);
-var pedidosRepository = new PedidosRepository(databaseConfig);
-var itenspedidosRepository = new ItensPedidosRepository(databaseConfig);
-var vendedoresRepository = new VendedoresRepository(databaseConfig);
-var produtosRepository = new ProdutosRepository(databaseConfig);
+var clienteRepository = new ClientesRepository(databaseConfig);
+var pedidoRepository = new PedidosRepository(databaseConfig);
+var itenspedidoRepository = new ItensPedidosRepository(databaseConfig);
+var vendedoreRepository = new VendedoresRepository(databaseConfig);
+var produtoRepository = new ProdutosRepository(databaseConfig);
 
 var modelName = args[0];
 var modelAction = args[1];
