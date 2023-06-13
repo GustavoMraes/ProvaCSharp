@@ -233,18 +233,20 @@
         if(modelAction == "Listar")
         {
 
-            Console.WriteLine("Pedido Listado!");
-            Console.WriteLine("Nro Pedido   Id Empregado   Data do Pedido        Peso        Codigo da Transportadora   Id do Cliente");
-            foreach (var pedido in pedidoRepository.GetAll())
+            Console.WriteLine("Listar Vendedor!");
+            Console.WriteLine("Código Vendedor   Nome Vendedor   Salário Fixo        Faixa Comissão");
+            foreach (var vendedor in vendedoresRepository.Listar())
             {
-                Console.WriteLine($"{pedido.PedidoID, -12} {pedido.EmpregadoID, -14} {pedido.DataPedido, -21} {pedido.Peso, -9} {pedido.CodTransportadora, -28} {pedido.PedidoClienteID}");
-            }
+                Console.WriteLine($"{vendedor.CodVendedor, -12} {vendedor.Nome, -14} {vendedor.SalarioFixo, -21} {vendedor.FaixaComissao, -17}");
+            }   
         }
 
         if(modelAction == "Inserir")
+        //CONTINUAR DAQUI
         {
-            Console.WriteLine("Pedido Inserido!");
+            Console.WriteLine("Inserir Vendedor");
             var pedidoId = Convert.ToInt32(args[2]);
+
             var empregadoID = Convert.ToInt32(args[3]);
             string dataPedido = args[4];
             string peso = args[5];
