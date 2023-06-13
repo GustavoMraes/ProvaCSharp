@@ -60,14 +60,14 @@ class ClientesRepository {
 
         return clientes;
     }
-    public bool Apresentar(int clientesid)
+    public bool Apresentar(int codcliente)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
         command.CommandText = "SELECT count(id) FROM Clientes WHERE (id = $id)";
-        command.Parameters.AddWithValue("$id", clientesid);
+        command.Parameters.AddWithValue("$id", codcliente);
 
         var reader = command.ExecuteReader();
         reader.Read();

@@ -57,14 +57,32 @@ class PedidosRepository {
         return pedido;
     }     
 
-    public Pedidos GetById(int coditempedido)
+
+     public bool Apresentar(int CodPedido)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT count(id) FROM Pedidos WHERE (id = $id)";
+        command.Parameters.AddWithValue("$id", CodPedido);
+
+        var reader = command.ExecuteReader();
+        reader.Read();
+        var result = reader.GetBoolean(0);
+
+        return result;
+    }
+
+
+    public Pedidos GetById(int CodPedido)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
         command.CommandText = "SELECT * FROM Pedidos WHERE (id = $CodPedido)";
-        command.Parameters.AddWithValue("$CodPedido", coditempedido);
+        command.Parameters.AddWithValue("$CodPedido", CodPedido);
 
         var reader = command.ExecuteReader();
         reader.Read();

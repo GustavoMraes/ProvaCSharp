@@ -76,14 +76,16 @@ class ItensPedidosRepository
         return result;
     }
 
-     public ItensPedidos GetById(int coditempedido)
+
+
+     public ItensPedidos GetById(int itensPedidosid)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM ItensPedidos WHERE (id = $coditempedido)";
-        command.Parameters.AddWithValue("$coditempedido", coditempedido);
+        command.CommandText = "SELECT * FROM ItensPedidos WHERE (id = $itensPedidosid)";
+        command.Parameters.AddWithValue("$itensPedidosid", itensPedidosid);
 
         var reader = command.ExecuteReader();
         reader.Read();

@@ -40,6 +40,23 @@ class ProdutosRepository{
     }
 
 
+public bool Apresentar(int CodProduto)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT count(id) FROM Produtos WHERE (id = $id)";
+        command.Parameters.AddWithValue("$id", CodProduto);
+
+        var reader = command.ExecuteReader();
+        reader.Read();
+        var result = reader.GetBoolean(0);
+
+        return result;
+    }
+
+
     public Produtos GetById(int CodProduto)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
@@ -59,7 +76,7 @@ class ProdutosRepository{
         return produto;
     }
 
-    
+
 
 
 
