@@ -39,8 +39,24 @@ class ProdutosRepository{
         return Produtos;
     }
 
+    public Produtos Inserir(Produtos produto)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
 
-public bool Apresentar(int CodProduto)
+        var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO Pedidos VALUES($CodProduto, $Descricao, $ValorUnitario";
+        command.Parameters.AddWithValue("$CodProduto", produto.CodProduto);
+        command.Parameters.AddWithValue("$Descricao", produto.Descricao);
+        command.Parameters.AddWithValue("$ValorUnitario", produto.ValorUnitario);
+
+        command.ExecuteNonQuery();
+        connection.Close();
+
+        return produto;
+    }     
+
+    public bool Apresentar(int CodProduto)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
