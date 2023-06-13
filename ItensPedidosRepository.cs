@@ -30,8 +30,8 @@ class ItensPedidosRepository
             var itempedidocodpedido = reader.GetString(1);
             var itempedidocodproduto = reader.GetString(2);
             var quantidade = reader.GetString(3);            
-            var itensPedido =  ReaderToItensPedidos(reader);
-            itensPedidos.Add(itensPedido);
+            var itemPedido =  ReaderToItensPedidos(reader);
+            itensPedidos.Add(itemPedido);
         }
 
         connection.Close();
