@@ -189,41 +189,43 @@
         if(modelAction == "Listar")
         {
 
-            Console.WriteLine("Pedido Listado!");
-            Console.WriteLine("Nro Pedido   Id Empregado   Data do Pedido        Peso        Codigo da Transportadora   Id do Cliente");
-            foreach (var pedido in pedidoRepository.GetAll())
+            Console.WriteLine("Listar Itens do Pedido");
+            Console.WriteLine("Código Item Pedido   Quantidade   Código Pedido     Codigo Produto");
+            foreach (var ip in itenspedidosRepository.Listar())
             {
-                Console.WriteLine($"{pedido.PedidoID, -12} {pedido.EmpregadoID, -14} {pedido.DataPedido, -21} {pedido.Peso, -9} {pedido.CodTransportadora, -28} {pedido.PedidoClienteID}");
+                Console.WriteLine($"{ip.CodItemPedido, -12} {ip.Quantidade, -14} {ip.ItemPedidoCodPedido, -21} {ip.ItemPedidoCodProduto, -9}");
             }
         }
 
         if(modelAction == "Inserir")
         {
-            Console.WriteLine("Pedido Inserido!");
-            var pedidoId = Convert.ToInt32(args[2]);
-            var empregadoID = Convert.ToInt32(args[3]);
-            string dataPedido = args[4];
-            string peso = args[5];
-            var codTransportadora = Convert.ToInt32(args[6]);
-            var pedidoClienteID = Convert.ToInt32(args[7]);
-            var pedido = new Pedido(pedidoId, empregadoID, dataPedido, peso, codTransportadora, pedidoClienteID);
-            pedidoRepository.Save(pedido);
+            Console.WriteLine("Inserir Itens do Pedido");
+            Console.WriteLine("Digite o código do item do pedido            : ");
+            var codItemPedido = Convert.ToInt32(args[2]);
+            Console.WriteLine("Digite o código do pedido do item do pedido  : ");
+            string quantidade = Console.ReadLine();
+            Console.WriteLine("Digite o código do produto do item do pedido : ");
+            string itemPedidoCodPedido = Console.ReadLine();
+            Console.WriteLine("Digite a quantidade do item do pedido        : ");
+            string itemPedidoCodProduto = Console.ReadLine();
+            var itemPedidos = new Pedido(codItemPedido, quantidade, itemPedidoCodPedido, itemPedidoCodProduto);
+            itenspedidosRepository.Inserir(itemPedidos);
         }
 
         if(modelAction == "Apresentar")
         {
             Console.WriteLine("Apresentar Pedido");
-            Console.Write("Digite o id do pedido : ");
-            var pedidoid = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o código do pedido : ");
+            var codItemPedido = Convert.ToInt32(Console.ReadLine());
         
-            if(pedidoRepository.ExitsById(pedidoid))
+            if(itenspedidosRepository.ExitsById(codItemPedido))
             {
-                var pedido = pedidoRepository.GetById(pedidoid);
-                Console.WriteLine($"{pedido.PedidoID}, {pedido.EmpregadoID}, {pedido.DataPedido}, {pedido.Peso}, {pedido.CodTransportadora}, {pedido.PedidoClienteID}");
+                var itensPedido = itenspedidosRepository.GetById(pedidoid);
+                Console.WriteLine($"{itensPedido.CodItemPedido}, {itensPedido.Quantidade}, {itensPedido.ItemPedidoCodPedido}, {itensPedido.ItemPedidoCodProduto}");
             } 
             else 
             {
-                Console.WriteLine($"O cliente com Id {pedidoid} não existe.");
+                Console.WriteLine($"O pedido com o código {codItemPedido} não existe.");
             }
         }
     } 
