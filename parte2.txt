@@ -1,4 +1,4 @@
-    /*if (modelAction == "MostrarPedidosCliente")
+if (modelAction == "MostrarPedidosCliente")
     {
         Console.WriteLine("Mostrar Pedidos do Cliente");
         Console.Write("Digite o Código do Cliente: ");
@@ -53,26 +53,22 @@
     {
         Console.WriteLine("Mostrar Quantidades de Produtos Vendidos");
         Console.Write("Digite o Código do produto: ");
-        var codproduto = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Código Pedido   Código Produto         Descrição           Valor Unitário   Quantidade    Valor Total");
+        var itempedidocodproduto = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Código Pedido   Código Produto   Descrição   Valor Unitário   Quantidade   Valor Total");
 
-        if (itenspedidosRepository.Apresentar(codproduto))
+        var produtos = produtosRepository.Listar();
+        var itensPedidos = itenspedidosRepository.Listar();
+
+        foreach (var item in itensPedidos)
         {
-            foreach (var item in produtosRepository.Listar())
+            if (item.ItemPedidoCodProduto == itempedidocodproduto)
             {
-                if (codproduto == produto.CodProduto)
-                {
-                    var pedido = pedidosRepository.GetById(pedido.CodPedido);
-                    var itenspedidos = itenspedidosRepository.GetById();
+                var pedido = pedidosRepository.GetById(item.ItemPedidoCodPedido);
+                var produto = produtosRepository.GetById(item.ItemPedidoCodProduto);
 
+                var valorTotal = produto.ValorUnitario * item.Quantidade;
 
-
-                    Console.WriteLine($"{pedido.CodPedido, -15} {produto.CodProduto, -21}, {produto.Descricao, -21}, {produto.ValorUnitario, -21}, {itens.CodProduto, -21}");
-                }
+                Console.WriteLine($"{pedido.CodPedido, -15} {produto.CodProduto, -16} {produto.Descricao, -12} {produto.ValorUnitario, -15} {item.Quantidade, -12} {valorTotal}");
             }
         }
-        else
-        {
-            Console.WriteLine($"O cliente com Id {codproduto} não existe.");
-        }
-    }*/
+    }
