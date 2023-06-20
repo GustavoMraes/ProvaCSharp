@@ -260,18 +260,18 @@
 
         if(modelAction == "Apresentar")
         {
-            Console.WriteLine("Apresentar Pedido");
-            Console.Write("Digite o id do pedido : ");
-            var pedidoid = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Apresentar Vendedor");
+            Console.Write("Digite o código do vendedor : ");
+            var codVendedor  = Convert.ToInt32(Console.ReadLine());
         
-            if(pedidoRepository.ExitsById(pedidoid))
+            if(vendedoresRepository.ExitsById(codVendedor))
             {
-                var pedido = pedidoRepository.GetById(pedidoid);
-                Console.WriteLine($"{pedido.PedidoID}, {pedido.EmpregadoID}, {pedido.DataPedido}, {pedido.Peso}, {pedido.CodTransportadora}, {pedido.PedidoClienteID}");
+                var vendedor = vendedoresRepository.GetById(pedidoid);
+                Console.WriteLine($"{vendedor.CodVendedor }, {vendedor.Nome }, {vendedor.SalarioFixo }, {vendedor.FaixaComissao }");
             } 
             else 
             {
-                Console.WriteLine($"O cliente com Id {pedidoid} não existe.");
+                Console.WriteLine($"O vendedor com o código {codVendedor} não existe.");
             }
         }
     } 
