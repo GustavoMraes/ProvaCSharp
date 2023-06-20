@@ -244,18 +244,18 @@
         }
 
         if(modelAction == "Inserir")
-        //CONTINUAR DAQUI
         {
             Console.WriteLine("Inserir Vendedor");
-            var pedidoId = Convert.ToInt32(args[2]);
-
-            var empregadoID = Convert.ToInt32(args[3]);
-            string dataPedido = args[4];
-            string peso = args[5];
-            var codTransportadora = Convert.ToInt32(args[6]);
-            var pedidoClienteID = Convert.ToInt32(args[7]);
-            var pedido = new Pedido(pedidoId, empregadoID, dataPedido, peso, codTransportadora, pedidoClienteID);
-            pedidoRepository.Save(pedido);
+            Console.WriteLine("Digite o Código do vendedor:            ");
+            var codVendedor = Convert.ToInt32(args[2]);
+            Console.WriteLine("Digite o Nome do vendedor:              ");
+            string nome = Console.ReadLine();
+            Console.WriteLine("Digite o Salário do vendedor:           ");
+            var salario = Convert.ToDecimal(args[4]);
+            Console.WriteLine("Digite a Faixa de Comissão do vendedor: ");
+            string faixaComissão = Console.ReadLine();
+            var vendedor = new Vendedor(codVendedor, nome, salario, faixaComissão);
+            vendedoresRepository.Inserir(vendedor);
         }
 
         if(modelAction == "Apresentar")
