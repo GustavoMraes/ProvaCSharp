@@ -190,10 +190,10 @@ if (modelName == "ItensPedido")
     {
 
         Console.WriteLine("Listar Itens do Pedido");
-        Console.WriteLine("Código Item Pedido   Quantidade   Código Pedido     Codigo Produto");
+        Console.WriteLine("Código Item Pedido   Quantidade   Código Pedido   Codigo Produto");
         foreach (var ip in itenspedidosRepository.Listar())
         {
-            Console.WriteLine($"{ip.CodItemPedido,-12} {ip.Quantidade,-14} {ip.ItemPedidoCodPedido,-21} {ip.ItemPedidoCodProduto,-9}");
+            Console.WriteLine($"{ip.CodItemPedido,-12} {ip.Quantidade,-15} {ip.ItemPedidoCodPedido,-15} {ip.ItemPedidoCodProduto,-15}");
         }
     }
 
