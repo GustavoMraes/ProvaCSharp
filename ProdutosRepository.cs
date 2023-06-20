@@ -45,7 +45,7 @@ class ProdutosRepository{
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "INSERT INTO Pedidos VALUES($CodProduto, $Descricao, $ValorUnitario";
+        command.CommandText = "INSERT INTO Produtos VALUES($CodProduto, $Descricao, $ValorUnitario)";
         command.Parameters.AddWithValue("$CodProduto", produto.CodProduto);
         command.Parameters.AddWithValue("$Descricao", produto.Descricao);
         command.Parameters.AddWithValue("$ValorUnitario", produto.ValorUnitario);

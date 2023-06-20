@@ -79,15 +79,13 @@ class VendedoresRepository {
 
         return vendedor;
     }
-
-
     public Vendedores Inserir(Vendedores vendedor)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "INSERT INTO Vendedores VALUES($codvendedor, $nome, $salariofixo, $faixacomissao ";
+        command.CommandText = "INSERT INTO Vendedores VALUES($codvendedor, $nome, $salariofixo, $faixacomissao) ";
         command.Parameters.AddWithValue("$codvendedor", vendedor.CodVendedor);
         command.Parameters.AddWithValue("$nome", vendedor.Nome);
         command.Parameters.AddWithValue("$salariofixo", vendedor.SalarioFixo);
@@ -98,16 +96,6 @@ class VendedoresRepository {
 
         return vendedor;
     }     
-
-
-
-
-
-
-
-
-
-
     private Vendedores ReaderToVendedores(SqliteDataReader reader)
     {
         var vendedor = new Vendedores(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetString(3));

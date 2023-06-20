@@ -30,7 +30,7 @@ if (modelName == "Cliente")
 
     if (modelAction == "Inserir")
     {
-        Console.WriteLine("Inserir Cliente!");
+        Console.WriteLine("Inserir Cliente");
         Console.Write("Digite o código do cliente    : ");
         int codcliente = Convert.ToInt32(Console.ReadLine());
         Console.Write("Digite o Nome do cliente      : ");
@@ -77,23 +77,23 @@ if (modelName == "Pedido")
     {
 
         Console.WriteLine("Listar Pedido");
-        Console.WriteLine("Código Pedido  Prazo Entrega    Data Pedido        Código Cliente        Código Vendedor");
+        Console.WriteLine("Código Pedido    Prazo Entrega          Data Pedido           Código Cliente    Código Vendedor");
         foreach (var pedido in pedidosRepository.Listar())
         {
-            Console.WriteLine($"{pedido.CodPedido,-12} {pedido.PrazoEntrega,-14} {pedido.DataPedido,-21} {pedido.PedidoCodCliente,-9} {pedido.PedidoCodVendedor,-28}");
+            Console.WriteLine($"{pedido.CodPedido, -16} {pedido.PrazoEntrega, -22} {pedido.DataPedido,-21} {pedido.PedidoCodCliente,-17} {pedido.PedidoCodVendedor, 0}");
         }
     }
 
     if (modelAction == "Inserir")
     {
         Console.WriteLine("Inserir Pedido");
-        Console.Write("Digite o código do pedido:         ");
+        Console.Write("Digite o código do pedido             : ");
         int codPedido = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Digite o prazo de entrega do pedido:    ");
+        Console.Write("Digite o prazo de entrega do pedido   : ");
         DateTime prazoEntrega = Convert.ToDateTime(Console.ReadLine());       
-        Console.Write("Digite o código do cliente do pedido");
+        Console.Write("Digite o código do cliente do pedido  : ");
         int pedidoCodCliente = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Digite o código do vendedor do pedido");
+        Console.Write("Digite o código do vendedor do pedido : ");
         int pedidoCodVendedor = Convert.ToInt32(Console.ReadLine());
         var pedido = new Pedidos(codPedido, prazoEntrega, DateTime.Now, pedidoCodCliente, pedidoCodVendedor);
         pedidosRepository.Inserir(pedido);
@@ -148,18 +148,18 @@ if (modelName == "Produto")
         Console.WriteLine("Código Produto   Descrição   Valor Unitário");
         foreach (var produto in produtosRepository.Listar())
         {
-            Console.WriteLine($"{produto.CodProduto,-12} {produto.Descricao,-14} {produto.ValorUnitario,-21}");
+            Console.WriteLine($"{produto.CodProduto,-16} {produto.Descricao,-11} {produto.ValorUnitario}");
         }
     }
 
     if (modelAction == "Inserir")
     {
-        Console.WriteLine("Inserir Produto!");
-        Console.Write("Digite o Código do Produto         : ");
+        Console.WriteLine("Inserir Produto");
+        Console.Write("Digite o código do produto         : ");
         var codProduto = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Digite a Descrição do Produto      : ");
+        Console.Write("Digite a descrição do produto      : ");
         string? descricao = Console.ReadLine();
-        Console.Write("Digite o Valor Únitario do Produto : ");
+        Console.Write("Digite o valor unitário do produto : ");
         var valorUnitario = Convert.ToInt32(Console.ReadLine());
         var produto = new Produtos(codProduto, descricao, valorUnitario);
         produtosRepository.Inserir(produto);
@@ -175,7 +175,7 @@ if (modelName == "Produto")
         {
             var produto = produtosRepository.GetById(codProduto);
 
-            Console.WriteLine($"{produto.CodProduto} {produto.Descricao} {produto.ValorUnitario}");
+            Console.WriteLine($"{produto.CodProduto}, {produto.Descricao}, {produto.ValorUnitario}");
         }
         else
         {
@@ -193,7 +193,7 @@ if (modelName == "ItensPedido")
         Console.WriteLine("Código Item Pedido   Quantidade   Código Pedido   Codigo Produto");
         foreach (var ip in itenspedidosRepository.Listar())
         {
-            Console.WriteLine($"{ip.CodItemPedido,-12} {ip.Quantidade,-15} {ip.ItemPedidoCodPedido,-15} {ip.ItemPedidoCodProduto,-15}");
+            Console.WriteLine($"{ip.CodItemPedido,-20} {ip.Quantidade,-12} {ip.ItemPedidoCodPedido,-15} {ip.ItemPedidoCodProduto}");
         }
     }
 
@@ -236,24 +236,24 @@ if (modelName == "Vendedor")
     if (modelAction == "Listar")
     {
 
-        Console.WriteLine("Listar Vendedor!");
-        Console.WriteLine("Código Vendedor   Nome Vendedor   Salário Fixo        Faixa Comissão");
+        Console.WriteLine("Listar Vendedor");
+        Console.WriteLine("Código Vendedor   Nome Vendedor      Salário Fixo   Faixa Comissão");
         foreach (var vendedor in vendedoresRepository.Listar())
         {
-            Console.WriteLine($"{vendedor.CodVendedor,-12} {vendedor.Nome,-14} {vendedor.SalarioFixo,-21} {vendedor.FaixaComissao,-17}");
+            Console.WriteLine($"{vendedor.CodVendedor,-17} {vendedor.Nome,-18} {vendedor.SalarioFixo,-14} {vendedor.FaixaComissao}");
         }
     }
 
     if (modelAction == "Inserir")
     {
         Console.WriteLine("Inserir Vendedor");
-        Console.Write("Digite o Código do vendedor:            ");
-        int codVendedor = Console.Read();
-        Console.Write("Digite o Nome do vendedor:              ");
+        Console.Write("Digite o código do vendedor            : ");
+        int codVendedor = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite o nome do vendedor              : ");
         string? nome = Console.ReadLine();
-        Console.Write("Digite o Salário do vendedor:           ");
+        Console.Write("Digite o salário fixo do vendedor      : ");
         decimal salario = decimal.Parse(Console.ReadLine());
-        Console.Write("Digite a Faixa de Comissão do vendedor: ");
+        Console.Write("Digite o faixa de comissão do vendedor : ");
         string? faixaComissao = Console.ReadLine();
 
         var vendedor = new Vendedores(codVendedor, nome, salario, faixaComissao);
@@ -264,7 +264,7 @@ if (modelName == "Vendedor")
     {
         Console.WriteLine("Apresentar Vendedor");
         Console.Write("Digite o código do vendedor : ");
-        int codVendedor = Console.Read();
+        int codVendedor = Convert.ToInt32(Console.ReadLine());
 
         if (vendedoresRepository.ExitsById(codVendedor))
         {
