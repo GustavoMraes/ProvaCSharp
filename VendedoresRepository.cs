@@ -10,8 +10,6 @@ class VendedoresRepository {
         _databaseConfig = databaseConfig;
     }
 
-
-
      public List<Vendedores> Listar()
     {
         var Vendedores = new List<Vendedores>();
@@ -41,16 +39,14 @@ class VendedoresRepository {
         return Vendedores;
     }
 
-
-
-    public bool Apresentar(int CodVendedor)
+    public bool Apresentar(int codvendedor)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT count(id) FROM Vendedores WHERE (id = $id)";
-        command.Parameters.AddWithValue("$id", CodVendedor);
+        command.CommandText = "SELECT count(codvendedor) FROM Vendedores WHERE (codvendedor = $id)";
+        command.Parameters.AddWithValue("$id", codvendedor);
 
         var reader = command.ExecuteReader();
         reader.Read();
@@ -59,16 +55,14 @@ class VendedoresRepository {
         return result;
     }
 
-
-
-    public Vendedores GetById(int CodVendedor)
+    public Vendedores GetById(int codvendedor)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM Vendedores WHERE (id = $CodVendedor)";
-        command.Parameters.AddWithValue("$CodVendedor", CodVendedor);
+        command.CommandText = "SELECT * FROM Vendedores WHERE (codvendedor = $codvendedor)";
+        command.Parameters.AddWithValue("$codvendedor", codvendedor);
 
         var reader = command.ExecuteReader();
         reader.Read();
@@ -102,9 +96,4 @@ class VendedoresRepository {
 
         return vendedor;
     }
-
-
-
-
-
 }

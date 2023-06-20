@@ -60,14 +60,14 @@ class ItensPedidosRepository
         return itensPedidos;
     }
 
-    public bool Apresentar(int itensPedidosid)
+    public bool Apresentar(int coditempedido)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT count(id) FROM ItensPedidos WHERE (id = $id)";
-        command.Parameters.AddWithValue("$id", itensPedidosid);
+        command.CommandText = "SELECT count(coditempedido) FROM ItensPedidos WHERE (coditempedido = $id)";
+        command.Parameters.AddWithValue("$id", coditempedido);
 
         var reader = command.ExecuteReader();   
         reader.Read();
@@ -78,14 +78,14 @@ class ItensPedidosRepository
 
 
 
-     public ItensPedidos GetById(int itensPedidosid)
+     public ItensPedidos GetById(int coditempedido)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM ItensPedidos WHERE (id = $itensPedidosid)";
-        command.Parameters.AddWithValue("$itensPedidosid", itensPedidosid);
+        command.CommandText = "SELECT * FROM ItensPedidos WHERE (coditempedido = $coditempedido)";
+        command.Parameters.AddWithValue("$coditempedido", coditempedido);
 
         var reader = command.ExecuteReader();
         reader.Read();
@@ -107,4 +107,3 @@ class ItensPedidosRepository
         return ItemPedido;
     }
     }
-

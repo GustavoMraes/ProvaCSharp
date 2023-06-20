@@ -66,7 +66,7 @@ class ClientesRepository {
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT count(id) FROM Clientes WHERE (id = $id)";
+        command.CommandText = "SELECT count(codcliente) FROM Clientes WHERE (codcliente = $id)";
         command.Parameters.AddWithValue("$id", codcliente);
 
         var reader = command.ExecuteReader();
@@ -82,7 +82,7 @@ class ClientesRepository {
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM Clientes WHERE (id = $codcliente)";
+        command.CommandText = "SELECT * FROM Clientes WHERE (codcliente = $codcliente)";
         command.Parameters.AddWithValue("$codcliente", codcliente);
 
         var reader = command.ExecuteReader();

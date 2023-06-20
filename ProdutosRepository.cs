@@ -62,7 +62,7 @@ class ProdutosRepository{
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT count(id) FROM Produtos WHERE (id = $id)";
+        command.CommandText = "SELECT count(CodProduto) FROM Produtos WHERE (CodProduto = $id)";
         command.Parameters.AddWithValue("$id", CodProduto);
 
         var reader = command.ExecuteReader();
@@ -79,7 +79,7 @@ class ProdutosRepository{
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT * FROM Produtos WHERE (id = $CodProduto)";
+        command.CommandText = "SELECT * FROM Produtos WHERE (CodProduto = $CodProduto)";
         command.Parameters.AddWithValue("$CodProduto", CodProduto);
 
         var reader = command.ExecuteReader();
