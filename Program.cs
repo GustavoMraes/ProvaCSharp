@@ -21,10 +21,10 @@ if (modelName == "Cliente")
     if (modelAction == "Listar")
     {
         Console.WriteLine("Listar Cliente");
-        Console.WriteLine("Código Cliente  Nome Cliente          Endereço                     Cidade                     CEP         UF                          IE");
+        Console.WriteLine("Código Cliente   Nome Cliente         Endereço                   Cidade      CEP        UF   IE");
         foreach (var cliente in clientesRepository.Listar())
         {
-            Console.WriteLine($"{cliente.CodCliente,-12} {cliente.Nome,-29} {cliente.Endereco,-26} {cliente.Cidade,-26} {cliente.Cep,-20} {cliente.Uf,-29} {cliente.Ie}");
+            Console.WriteLine($"{cliente.CodCliente,-16} {cliente.Nome,-20} {cliente.Endereco,-26} {cliente.Cidade,-11} {cliente.Cep,-10} {cliente.Uf,-4} {cliente.Ie}");
         }
     }
 
@@ -77,10 +77,10 @@ if (modelName == "Pedido")
     {
 
         Console.WriteLine("Listar Pedido");
-        Console.WriteLine("Código Pedido    Prazo Entrega          Data Pedido           Código Cliente    Código Vendedor");
+        Console.WriteLine("Código Pedido   Prazo Entrega         Data Pedido           Código Cliente   Código Vendedor");
         foreach (var pedido in pedidosRepository.Listar())
         {
-            Console.WriteLine($"{pedido.CodPedido, -16} {pedido.PrazoEntrega, -22} {pedido.DataPedido,-21} {pedido.PedidoCodCliente,-17} {pedido.PedidoCodVendedor, 0}");
+            Console.WriteLine($"{pedido.CodPedido, -15} {pedido.PrazoEntrega, -21} {pedido.DataPedido,-21} {pedido.PedidoCodCliente,-16} {pedido.PedidoCodVendedor}");
         }
     }
 
@@ -160,7 +160,7 @@ if (modelName == "Produto")
         Console.Write("Digite a descrição do produto      : ");
         string? descricao = Console.ReadLine();
         Console.Write("Digite o valor unitário do produto : ");
-        var valorUnitario = Convert.ToInt32(Console.ReadLine());
+        var valorUnitario = Convert.ToDecimal(Console.ReadLine());
         var produto = new Produtos(codProduto, descricao, valorUnitario);
         produtosRepository.Inserir(produto);
     }
@@ -219,7 +219,7 @@ if (modelName == "ItensPedido")
         Console.Write("Digite o código do pedido : ");
         var codItemPedido = Convert.ToInt32(Console.ReadLine());
 
-        if (itenspedidosRepository.ExitsById(codItemPedido))
+        if (itenspedidosRepository.Apresentar(codItemPedido))
         {
             var itensPedido = itenspedidosRepository.GetById(codItemPedido);
             Console.WriteLine($"{itensPedido.CodItemPedido}, {itensPedido.Quantidade}, {itensPedido.ItemPedidoCodPedido}, {itensPedido.ItemPedidoCodProduto}");

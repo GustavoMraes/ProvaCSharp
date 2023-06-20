@@ -338,11 +338,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/estudante1/SP3067602/AtividadeAvaliativa/AtividadeAvaliativa.csproj",
+      "projectUniqueName": "/home/estudante1/Documentos/SP3065791/Prova/ProvaCSharp/AtividadeAvaliativa.csproj",
       "projectName": "AtividadeAvaliativa",
-      "projectPath": "/home/estudante1/SP3067602/AtividadeAvaliativa/AtividadeAvaliativa.csproj",
+      "projectPath": "/home/estudante1/Documentos/SP3065791/Prova/ProvaCSharp/AtividadeAvaliativa.csproj",
       "packagesPath": "/home/estudante1/.nuget/packages/",
-      "outputPath": "/home/estudante1/SP3067602/AtividadeAvaliativa/obj/",
+      "outputPath": "/home/estudante1/Documentos/SP3065791/Prova/ProvaCSharp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/estudante1/.nuget/NuGet/NuGet.Config"
