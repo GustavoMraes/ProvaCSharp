@@ -43,7 +43,7 @@ class VendedoresRepository {
 
 
 
-    public bool Apresentar(int CodVendedor)
+    public bool ExitsById(int CodVendedor)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
@@ -79,6 +79,25 @@ class VendedoresRepository {
 
         return vendedor;
     }
+
+
+    public Vendedores Inserir(Vendedores vendedor)
+    {
+        var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO Vendedores VALUES($codvendedor, $nome, $salariofixo, $faixacomissao ";
+        command.Parameters.AddWithValue("$codvendedor", vendedor.CodVendedor);
+        command.Parameters.AddWithValue("$nome", vendedor.Nome);
+        command.Parameters.AddWithValue("$salariofixo", vendedor.SalarioFixo);
+        command.Parameters.AddWithValue("$faixacomissao", vendedor.FaixaComissao);
+
+        command.ExecuteNonQuery();
+        connection.Close();
+
+        return vendedor;
+    }     
 
 
 

@@ -29,7 +29,7 @@ class DatabaseSetup {
                 cidade varchar(45) not null,
                 cep varchar(11) not null,
                 uf varchar(02) not null,
-                ie varchar(12) not null);
+                ie varchar(12) not null
             );
         ";
 
@@ -44,7 +44,7 @@ class DatabaseSetup {
         var command = connection.CreateCommand();
         command.CommandText = @"
             CREATE TABLE IF NOT EXISTS Pedidos(
-                codpedido int not nulPedidosl primary key,
+                codpedido int not null primary key,
                 prazoentrega datetime not null,
                 datapedido datetime not null,
                 pedidocodcliente int not null,
