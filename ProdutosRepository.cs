@@ -56,7 +56,7 @@ class ProdutosRepository{
         return produto;
     }     
 
-    public bool ExitsById(int CodProduto)
+    public bool Apresentar(int CodProduto)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();

@@ -43,7 +43,7 @@ class VendedoresRepository {
 
 
 
-    public bool ExitsById(int CodVendedor)
+    public bool Apresentar(int CodVendedor)
     {
         var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();

@@ -171,7 +171,7 @@ if (modelName == "Produto")
         Console.Write("Digite o código do produto : ");
         var codProduto = Convert.ToInt32(Console.ReadLine());
 
-        if (produtosRepository.ExitsById(codProduto))
+        if (produtosRepository.Apresentar(codProduto))
         {
             var produto = produtosRepository.GetById(codProduto);
 
@@ -266,7 +266,7 @@ if (modelName == "Vendedor")
         Console.Write("Digite o código do vendedor : ");
         int codVendedor = Convert.ToInt32(Console.ReadLine());
 
-        if (vendedoresRepository.ExitsById(codVendedor))
+        if (vendedoresRepository.Apresentar(codVendedor))
         {
             var vendedor = vendedoresRepository.GetById(codVendedor);
             Console.WriteLine($"{vendedor.CodVendedor}, {vendedor.Nome}, {vendedor.SalarioFixo}, {vendedor.FaixaComissao}");
